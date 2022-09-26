@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import cartItems from "../../utils/mocks/cartItems";
+import { ICartInitialState } from "../../utils/interfaces/cart";
+import { ICartItem } from '../../utils/interfaces/cart/index';
 
-const initialState = {
+const initialState: ICartInitialState = {
   cartItems: cartItems,
   amount: 0,
   total: 0,
-  isLoading: 0,
+  isLoading: false,
 };
 
 const cartSlice = createSlice({
@@ -22,16 +24,20 @@ const cartSlice = createSlice({
     },
     increase: (state, { payload }) => {
       const cartItem = state.cartItems.find((item) => item.id === payload.id);
-      cartItem.amount = cartItem.amount + 1;
+      if (cartItem) {
+        cartItem.amount = cartItem?.amount + 1;
+      }
     },
     decrease: (state, { payload }) => {
       const cartItem = state.cartItems.find((item) => item.id === payload.id);
-      cartItem.amount = cartItem.amount - 1;
+      if (cartItem) {
+        cartItem.amount = cartItem.amount - 1;
+      }
     },
     calculateTotals: (state) => {
       let amount = 0;
       let total = 0;
-      state.cartItems.forEach((item) => {
+      state.cartItems.forEach((item:ICartItem) => {
         amount += item.amount;
         total += item.amount * item.price;
       });

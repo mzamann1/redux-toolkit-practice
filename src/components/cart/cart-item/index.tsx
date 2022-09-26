@@ -1,8 +1,12 @@
 import React from "react";
-import { ChevronDown, ChevronUp } from "../icons";
+import { ChevronDown, ChevronUp } from "../../../icons";
 
 import { useDispatch } from "react-redux";
-import { removeItem, increase, decrease } from "../features/cart/cartSlice";
+import {
+  removeItem,
+  increase,
+  decrease,
+} from "../../../features/cart/cartSlice";
 
 const CartItem = ({ id, img, title, price, amount }) => {
   const dispatch = useDispatch();

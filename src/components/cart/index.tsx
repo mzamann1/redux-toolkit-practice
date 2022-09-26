@@ -1,12 +1,12 @@
 import React from "react";
-import CartItem from "../CartItem";
+import CartItem from "../cart/cart-item";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart } from "../../features/cart/cartSlice";
-import { openModal } from "../features/modal/modalSlice";
+import { openModal } from "../shared/modal/modalSlice";
+import { ICartItem } from "../../utils/interfaces/cart";
 
 const CartContainer = () => {
   const dispatch = useDispatch();
-  const { cartItems, total, amount } = useSelector((state) => state.cart);
+  const { cartItems, total, amount } = useSelector((state: any) => state.cart);
 
   if (amount < 1) {
     return (
@@ -27,7 +27,7 @@ const CartContainer = () => {
       </header>
       {/* cart items */}
       <div>
-        {cartItems.map((item) => {
+        {cartItems.map((item: ICartItem) => {
           return <CartItem key={item.id} {...item} />;
         })}
       </div>

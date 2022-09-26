@@ -1,6 +1,7 @@
-import { closeModal } from "../features/modal/modalSlice";
+import React from "react";
+import { closeModal } from "../modal/modalSlice";
 import { useDispatch } from "react-redux";
-import { clearCart } from "../features/cart/cartSlice";
+import { clearCart } from "../../../features/cart/cartSlice";
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -34,4 +35,5 @@ const Modal = () => {
     </aside>
   );
 };
+
 export default Modal;
