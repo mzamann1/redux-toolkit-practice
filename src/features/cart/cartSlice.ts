@@ -1,8 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, AsyncThunk } from "@reduxjs/toolkit";
 
 import cartItems from "../../utils/mocks/cartItems";
+
 import { ICartInitialState } from "../../utils/interfaces/cart";
-import { ICartItem } from '../../utils/interfaces/cart/index';
+import { ICartItem } from "../../utils/interfaces/cart/index";
+
+import { getCartItems } from "../../api";
 
 const initialState: ICartInitialState = {
   cartItems: cartItems,
@@ -37,13 +40,25 @@ const cartSlice = createSlice({
     calculateTotals: (state) => {
       let amount = 0;
       let total = 0;
-      state.cartItems.forEach((item:ICartItem) => {
+      state.cartItems.forEach((item: ICartItem) => {
         amount += item.amount;
         total += item.amount * item.price;
       });
       state.amount = amount;
       state.total = total;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getCartItems.pending, (state: any) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getCartItems.fulfilled, (state: any, action: any) => {
+      state.isLoading = false;
+      state.cartItems = action.payload;
+    });
+    builder.addCase(getCartItems.rejected, (state: any) => {
+      state.isLoading = false;
+    });
   },
 });
 

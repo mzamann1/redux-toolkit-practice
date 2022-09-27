@@ -2,14 +2,23 @@ import React from "react";
 import { ChevronDown, ChevronUp } from "../../../icons";
 
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store/store";
 import {
   removeItem,
   increase,
   decrease,
 } from "../../../features/cart/cartSlice";
 
-const CartItem = ({ id, img, title, price, amount }) => {
-  const dispatch = useDispatch();
+interface IProps {
+  id: string;
+  img: string;
+  title: string;
+  price: number;
+  amount: number;
+}
+
+const CartItem = ({ id, img, title, price, amount }: IProps) => {
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <article className="cart-item">
       <img src={img} alt={title} />

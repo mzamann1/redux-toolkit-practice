@@ -3,10 +3,14 @@ import CartItem from "../cart/cart-item";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../shared/modal/modalSlice";
 import { ICartItem } from "../../utils/interfaces/cart";
+import { RootState, AppDispatch } from '../../store/store';
 
 const CartContainer = () => {
-  const dispatch = useDispatch();
-  const { cartItems, total, amount } = useSelector((state: any) => state.cart);
+  const dispatch = useDispatch<AppDispatch>();
+  
+  const { cartItems, total, amount } = useSelector(
+    (state: RootState) => state.cart
+  );
 
   if (amount < 1) {
     return (
