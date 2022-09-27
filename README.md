@@ -6,7 +6,7 @@ This App is Built using React 18+ version with TypeScript, so there are few chan
 // Before
 import { render } from 'react-dom';
 const container = document.getElementById('app');
-render(<App tab="home" />, container);
+render(your app, container);
 
 // After
 import { createRoot } from 'react-dom/client';
@@ -18,4 +18,4 @@ const root = createRoot(container);
 //if you use TypeScript
 const root = createRoot(container!);
 
-root.render(<App tab="home" />);
+root.render(your app);
